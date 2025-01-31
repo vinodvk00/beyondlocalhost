@@ -28,7 +28,7 @@ body {
 }
 
 .post-content a {
-  color: rgb(73, 149, 199);
+  @apply text-accent;
   text-decoration: none;
 }
 

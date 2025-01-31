@@ -53,12 +53,12 @@ export default function Header() {
     <Navbar className='border-b-2'>
       <Link
         to='/'
-        className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
+        className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-text'
       >
-        <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
-          Sahand's
+        <span className='px-2 py-1 bg-gradient-to-r to-indigo-500 via-purple-500 from-slate-700 rounded-lg text-white'>
+          beyondlocalhost.
         </span>
-        Blog
+        Space
       </Link>
       <form onSubmit={handleSubmit}>
         <TextInput
