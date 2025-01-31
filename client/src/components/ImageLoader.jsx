@@ -1,4 +1,3 @@
-// filepath: /C:/Users/vinod/Desktop/projects/mern-blog-main/mern-blog-main/client/src/components/ImageLoader.jsx
 import React, { useState } from 'react';
 
 const ImageLoader = ({ src, alt, className }) => {
