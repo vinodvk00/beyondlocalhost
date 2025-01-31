@@ -1,4 +1,3 @@
-// filepath: /c:/Users/vinod/Desktop/projects/mern-blog-main/mern-blog-main/client/src/utils/appwriteClient.js
 import { Client, Storage, ID } from "appwrite";
 
 const client = new Client()
