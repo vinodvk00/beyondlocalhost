@@ -1,3 +1,6 @@
+import flowbitePlugin from 'flowbite/plugin';
+import tailwindScrollbar from 'tailwind-scrollbar';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -8,7 +11,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#111114",
+        background: "#000000",
         card: "#0c0c0c",
         text: "#eaeaea",
         secondary: "#9e9e9e",
@@ -20,7 +23,7 @@ export default {
     },
   },
   plugins: [
-    require('flowbite/plugin'),
-    require('tailwind-scrollbar'),
+    flowbitePlugin,
+    tailwindScrollbar,
   ],
 };
