@@ -11,8 +11,5 @@ export default defineConfig({
       },
     },
   },
-  build: {
-    outDir: "dist", // This should match the Vercel setting (inside `client` folder)
-  },
   plugins: [react()],
 });

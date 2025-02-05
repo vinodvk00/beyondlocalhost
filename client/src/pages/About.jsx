@@ -6,7 +6,7 @@ export default function About() {
           <h1 className='text-3xl font font-semibold text-center my-7'>
             About beyondlocalhost.space
           </h1>
-          <div className='text-md text-gray-500 flex flex-col gap-6'>
+          <div className='text-md text-text flex flex-col gap-6'>
           <p>
               Welcome to <strong>BeyondLocalhost.Space</strong>! This is my personal platform where I showcase my work, projects, and learnings.
               I am Vinod, a passionate developer exploring various aspects of web development, cybersecurity, and software engineering.
