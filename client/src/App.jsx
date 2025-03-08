@@ -19,25 +19,37 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/sign-in' element={<SignIn />} />
-        <Route path='/sign-up' element={<SignUp />} />
-        <Route path='/search' element={<Search />} />
-        <Route element={<PrivateRoute />}>
-          <Route path='/dashboard' element={<Dashboard />} />
-        </Route>
-        <Route element={<OnlyAdminPrivateRoute />}>
-          <Route path='/create-post' element={<CreatePost />} />
-          <Route path='/update-post/:postId' element={<UpdatePost />} />
-        </Route>
-
-        <Route path='/projects' element={<Projects />} />
-        <Route path='/post/:postSlug' element={<PostPage />} />
-      </Routes>
-      <Footer />
+      <div className="flex flex-col min-h-screen relative">
+        {/* Header with higher z-index */}
+        <div className="sticky top-0 z-30">
+          <Header />
+        </div>
+        
+        {/* Main content */}
+        <main className="flex-grow relative">
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/sign-in' element={<SignIn />} />
+            <Route path='/sign-up' element={<SignUp />} />
+            <Route path='/search' element={<Search />} />
+            <Route element={<PrivateRoute />}>
+              <Route path='/dashboard' element={<Dashboard />} />
+            </Route>
+            <Route element={<OnlyAdminPrivateRoute />}>
+              <Route path='/create-post' element={<CreatePost />} />
+              <Route path='/update-post/:postId' element={<UpdatePost />} />
+            </Route>
+            <Route path='/projects' element={<Projects />} />
+            <Route path='/post/:postSlug' element={<PostPage />} />
+          </Routes>
+        </main>
+        
+        {/* Footer with higher z-index */}
+        <div className="relative z-30">
+          <Footer />
+        </div>
+      </div>
     </BrowserRouter>
   );
 }

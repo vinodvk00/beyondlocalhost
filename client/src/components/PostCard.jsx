@@ -3,23 +3,38 @@ import { getImageUrl } from './GetImageUrl';
 
 export default function PostCard({ post }) {
   return (
-    <div className='group relative w-full border border- hover:border-2 h-[400px] overflow-hidden rounded-lg sm:w-[430px] transition-all'>
-      <Link to={`/post/${post.slug}`}>
+    <div className="overflow-hidden rounded-lg bg-white/90 dark:bg-gray-900/60 backdrop-blur-sm border border-purple-500/20 hover:border-purple-400/70 transition-all duration-300 h-96 flex flex-col shadow-lg hover:shadow-purple-500/20 hover:shadow-xl">
+      <Link to={`/post/${post.slug}`} className="block overflow-hidden h-52 relative">
         <img
           src={getImageUrl(post?.image)}
-          alt='post cover'
-          className='h-[260px] w-full  object-cover group-hover:h-[200px] transition-all duration-300 z-20'
+          alt={post.title}
+          className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
         />
+        <div className="absolute top-2 left-2">
+          <span className="text-xs font-medium px-2 py-1 bg-purple-600/80 text-white rounded-full">
+            {post.category}
+          </span>
+        </div>
       </Link>
-      <div className='p-3 flex flex-col gap-2'>
-        <p className='text-lg font-semibold line-clamp-2'>{post.title}</p>
-        <span className='italic text-sm'>{post.category}</span>
-        <Link
-          to={`/post/${post.slug}`}
-          className='z-10 group-hover:bottom-0 absolute bottom-[-200px] left-0 right-0 border border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white transition-all duration-300 text-center py-2 rounded-md !rounded-tl-none m-2'
-        >
-          Read article
-        </Link>
+      
+      <div className="p-4 flex flex-col flex-1 justify-between">
+        <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2 line-clamp-2 hover:text-purple-600 dark:hover:text-purple-300 transition-colors">
+          {post.title}
+        </h3>
+        
+        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 mb-4">
+          {/* Clean up the content to remove HTML tags */}
+          {post.excerpt || (post.content ? post.content.replace(/<[^>]*>/g, '').substring(0, 100) + '...' : '...')}
+        </p>
+        
+        <div className="mt-auto">
+          <Link
+            to={`/post/${post.slug}`}
+            className="w-full inline-block text-center text-sm py-2 rounded-md border border-purple-500 text-purple-700 dark:text-purple-300 hover:bg-purple-600 hover:text-white transition-all duration-300"
+          >
+            Read article
+          </Link>
+        </div>
       </div>
     </div>
   );
