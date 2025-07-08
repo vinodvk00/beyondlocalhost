@@ -116,7 +116,7 @@ export const google = async (req, res, next) => {
 };
 
 export const microsoft = async (req, res, next) => {
-    console.log("Microsoft auth body:", req.body);
+    // console.log("Microsoft auth body:", req.body);
     const { email, name, microsoftPhotoUrl } = req.body;
     try {
         const user = await User.findOne({ email });
@@ -144,6 +144,54 @@ export const microsoft = async (req, res, next) => {
                 password: hashedPassword,
                 profilePicture:
                     microsoftPhotoUrl ||
+                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+            });
+            await newUser.save();
+            const token = jwt.sign(
+                { id: newUser._id, isAdmin: newUser.isAdmin },
+                process.env.JWT_SECRET
+            );
+            const { password, ...rest } = newUser._doc;
+            res.status(200)
+                .cookie("access_token", token, {
+                    httpOnly: true,
+                })
+                .json(rest);
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const github = async (req, res, next) => {
+    // console.log("GitHub auth body:", req.body);
+    const { email, name, githubPhotoUrl } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (user) {
+            const token = jwt.sign(
+                { id: user._id, isAdmin: user.isAdmin },
+                process.env.JWT_SECRET
+            );
+            const { password, ...rest } = user._doc;
+            res.status(200)
+                .cookie("access_token", token, {
+                    httpOnly: true,
+                })
+                .json(rest);
+        } else {
+            const generatedPassword =
+                Math.random().toString(36).slice(-8) +
+                Math.random().toString(36).slice(-8);
+            const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+            const newUser = new User({
+                username:
+                    name.toLowerCase().split(" ").join("") +
+                    Math.random().toString(9).slice(-4),
+                email,
+                password: hashedPassword,
+                profilePicture:
+                    githubPhotoUrl ||
                     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
             });
             await newUser.save();
